@@ -1,26 +1,23 @@
 package com.CodeCluster.UserService.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(unique = true)
-    private String username;
+    private String userName;
     private String name;
     @Column(unique = true)
     private String email;
     private String status;
-    private Date registrationDate;
+    private LocalDate registrationDate;
     private String password;
     private String role;
     @Lob
@@ -37,11 +34,11 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {
@@ -68,11 +65,11 @@ public class User {
         this.status = status;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 

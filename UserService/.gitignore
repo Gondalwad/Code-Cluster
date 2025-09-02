@@ -35,3 +35,5 @@ build/
 ### application.properties ###
 src/main/resources/application.properties
 src/main/resources/data.sql
+app.log*
+app.log

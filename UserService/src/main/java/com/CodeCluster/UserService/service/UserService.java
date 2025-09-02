@@ -28,7 +28,7 @@ public class UserService {
         User user = UserRequestDTOToUser.convert(userRequestDTO); // converts dto to user
 
         // checks if principal requested data already exists or not
-        if(userRepo.existsByUserName(user.getUsername())){
+        if(userRepo.existsByUsername(user.getUsername())){
             throw new UsernameExistsException("User already Exists By Username : " + user.getUsername());
         }
         if(userRepo.existsByEmail(user.getEmail())){

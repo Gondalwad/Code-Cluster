@@ -12,16 +12,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(unique = true)
-    private String userName;
+    private String username;
     private String name;
     @Column(unique = true)
     private String email;
     private String status;
-    private LocalDate registrationDate;
+    private LocalDate registration_date;
     private String password;
     private String role;
     @Lob
-    private byte[] profileImg;
+    private byte[] profile_img;
     // Getter Setters
 
 
@@ -34,11 +34,11 @@ public class User {
     }
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
-    public void setUsername(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -66,11 +66,11 @@ public class User {
     }
 
     public LocalDate getRegistrationDate() {
-        return registrationDate;
+        return registration_date;
     }
 
     public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
+        this.registration_date = registrationDate;
     }
 
     public String getPassword() {
@@ -89,11 +89,11 @@ public class User {
         this.role = role;
     }
 
-    public byte[] getProfileImg() {
-        return profileImg;
+    public byte[] getProfile_img() {
+        return profile_img;
     }
 
-    public void setProfileImg(byte[] profileImg) {
-        this.profileImg = profileImg;
+    public void setProfile_img(byte[] profile_img) {
+        this.profile_img = profile_img;
     }
 }

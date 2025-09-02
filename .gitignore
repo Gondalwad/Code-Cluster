@@ -2,4 +2,4 @@
 application.properties
 data.sql
 *.log
-app.log*.gz
+*.gz

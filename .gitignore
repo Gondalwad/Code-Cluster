@@ -1,5 +1,11 @@
 ### application.properties ###
-application.properties
-data.sql
-*.log
-*.gz
+# Ignore all application.properties files anywhere in the project
+**/application.properties
+**/application.yml
+
+# Ignore all data.sql files anywhere in the project
+**/data.sql
+
+# Ignore all log and gzip files recursively
+**/*.log
+**/*.gz

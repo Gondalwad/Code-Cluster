@@ -1,9 +1,9 @@
 package com.CodeCluster.AuthService.dto;
 
-public class UserResponseDTO {
+public class LoginResponseDTO {
     private final String jwt;
 
-    public UserResponseDTO(String jwt) {
+    public LoginResponseDTO(String jwt) {
         this.jwt = jwt;
     }
 

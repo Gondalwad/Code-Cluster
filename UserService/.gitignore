@@ -32,9 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-### application.properties ###
-application.properties
-data.sql
-../app.log
-../app.log*.gz
 

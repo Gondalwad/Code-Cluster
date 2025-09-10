@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SubmissionService" />
+        <module name="ExecutionService" />
         <module name="UserService" />
         <module name="ApiGateway" />
         <module name="AuthService" />
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ApiGateway" options="-parameters" />
       <module name="AuthService" options="-parameters" />
+      <module name="ExecutionService" options="-parameters" />
       <module name="SubmissionService" options="-parameters" />
       <module name="UserService" options="-parameters" />
     </option>

@@ -16,7 +16,7 @@ public class SolutionSubmissionService {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
     private static final String TOPIC = "code_execution_job";
-
+    private static final String GROUPID = "executor-service-group";
     public SolutionSubmissionService(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = objectMapper;

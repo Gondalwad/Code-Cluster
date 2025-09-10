@@ -9,3 +9,4 @@
 # Ignore all log and gzip files recursively
 **/*.log
 **/*.gz
+DockerCompose

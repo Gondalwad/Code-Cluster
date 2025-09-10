@@ -16,13 +16,14 @@ public class TraditionalAuthService {
     private final UserRepo repo;
     private final JwtUtil jwtUtil;
 
+
     public TraditionalAuthService(UserRepo repo, PasswordEncoder passwordEncoder, JwtUtil jwtUtil){
         this.repo = repo;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
 
-    // method to authenticate LoginRequestDTO
+    /// Method to authenticate LoginRequestDTO ///
     public Optional<String> authenticate(LoginRequestDTO loginRequestDTO){
         String regexUsername = "^[a-zA-Z][a-zA-Z0-9_]{2,15}$"; // username regex
         String regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // email regex
@@ -48,9 +49,11 @@ public class TraditionalAuthService {
             return jwtUtil.generateToken(principal.get().getUsername(), principal.get().getRole()).describeConstable();
         }
 
-
         return Optional.empty();
 
     }
 
+    public boolean validateToken(String token) {
+        return jwtUtil.isValidToken(token);
+    }
 }

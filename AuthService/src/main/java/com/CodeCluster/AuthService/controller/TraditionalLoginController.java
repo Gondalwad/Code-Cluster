@@ -7,13 +7,12 @@ import com.CodeCluster.AuthService.service.TraditionalAuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class TraditionalLoginController {
 
 
@@ -33,5 +32,17 @@ public class TraditionalLoginController {
         return token.map(s -> ResponseEntity.ok(new LoginResponseDTO(s)))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<Void> validate(@RequestHeader("Authorization") String authHeader){
+        // Authorization: Bearer <token>
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return authService.validateToken(authHeader.substring(7))
+                ? ResponseEntity.ok().build()
+                : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }

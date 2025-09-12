@@ -10,3 +10,4 @@
 **/*.log
 **/*.gz
 DockerCompose
+temp/

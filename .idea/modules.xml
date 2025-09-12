@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Code-Cluster.iml" filepath="$PROJECT_DIR$/Code-Cluster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExecutionService/ExecutionService.iml" filepath="$PROJECT_DIR$/ExecutionService/ExecutionService.iml" />
     </modules>
   </component>
 </project>

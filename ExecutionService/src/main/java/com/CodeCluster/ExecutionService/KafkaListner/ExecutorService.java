@@ -1,8 +1,10 @@
 package com.CodeCluster.ExecutionService.KafkaListner;
 
 import com.CodeCluster.ExecutionService.DTO.SubmitRequestDTO;
-import com.CodeCluster.ExecutionService.DockerService.ContainerService;
+import com.CodeCluster.ExecutionService.service.TestCode;
+import com.CodeCluster.ExecutionService.service.TestCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -10,22 +12,23 @@ import org.springframework.stereotype.Service;
 public class ExecutorService {
 
     private final ObjectMapper objectMapper;
-    private final ContainerService containerService;
-    //constructor
-    public ExecutorService(ObjectMapper objectMapper, ContainerService cs) {
+    private final TestCode testCode;
+    ///constructor
+    @Autowired
+    public ExecutorService(ObjectMapper objectMapper, TestCode testCode) {
         this.objectMapper = objectMapper;
-        this.containerService = cs;
+        this.testCode = testCode;
     }
 
-    // consumes job
+    /// consumes job
     @KafkaListener(topics = "code_execution_job",groupId = "executor-service-group")
     public void consumeJob(String message){
         try{
             SubmitRequestDTO job = objectMapper.readValue(message,SubmitRequestDTO.class);
 
-            System.out.println("hello");
-            containerService.createContainer(job);
-            // now request sent to docker Service which is responsible for creating container executing code and deleting container
+///         now request sent to TestCode which is responsible for
+///         creating container executing code and deleting container
+            String output = testCode.test(job);
 
         }catch (Exception e){
             System.out.println(e.getMessage());

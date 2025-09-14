@@ -6,6 +6,7 @@ import com.CodeCluster.ExecutionService.service.DockerService.factory.ContainerF
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/// Class is responsible to test code by creating containers
 @Service
 public class TestCode {
 
@@ -16,13 +17,15 @@ public class TestCode {
         this.containerFactory = containerFactory;
     }
 
+    /// method executing actual task of the class
     public String test(SubmitRequestDTO dto){
         /// Gets container for programming language
         Container container = containerFactory.buildContainer(dto.getProgrammingLanguage());
+
         /// saves returned string whether it is error or output
         String output = container.executeProgram(dto.getProblemId(), dto.getJobId(), dto.getCodeSolution());
 
-        // Temprority printint output and will be removed later after saving response into DB
+        /// Temporality printing output and will be removed later after saving response into DB
         System.out.println(output);
 
         return output;

@@ -25,8 +25,6 @@ public class TestCode {
         /// saves returned string whether it is error or output
         String output = container.executeProgram(dto.getProblemId(), dto.getJobId(), dto.getCodeSolution());
 
-        /// Temporality printing output and will be removed later after saving response into DB
-        System.out.println(output);
 
         return output;
     }

@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/submit")
 public class SubmissionController {
 
     private final SolutionSubmissionService submissionService;
@@ -22,10 +21,12 @@ public class SubmissionController {
         this.submissionService = submissionService;
     }
 
-    @PostMapping("/solution")
+    @PostMapping("/submit-solution")
     public ResponseEntity<SubmitResponseDTO> submitSolution(@RequestBody SubmitRequestDTO submitRequest){
-
+        /// upload event to kafka for execution using submission service which return SubmitResponseDTO to
+        /// send to respond user immediately
         SubmitResponseDTO submitResponse = submissionService.uploadEvent(UUID.randomUUID(), submitRequest);
+
 
         return ResponseEntity.status(201).body(submitResponse);
 

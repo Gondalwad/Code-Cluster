@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ProblemService {
+public class ProblemsTableService {
 
     private final ProblemRepository problemRepository;
 
-    public ProblemService(ProblemRepository problemRepository) {
+    public ProblemsTableService(ProblemRepository problemRepository) {
         this.problemRepository = problemRepository;
     }
 

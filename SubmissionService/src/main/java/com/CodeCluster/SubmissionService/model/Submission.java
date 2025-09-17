@@ -1,13 +1,10 @@
-package com.CodeCluster.ExecutionService.model;
+package com.CodeCluster.SubmissionService.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,9 +16,9 @@ public class Submission {
     @Lob
     private byte[] testCaseOutput;
     private String username;
-    private UUID problemId;
-    private LocalDateTime submissionDate;
     private int executionTime;
+    private UUID problemId;
+
     public UUID getJobId() {
         return jobId;
     }
@@ -43,7 +40,7 @@ public class Submission {
     }
 
     public void setTestCaseOutput(String testCaseOutput) {
-        this.testCaseOutput = testCaseOutput.getBytes(StandardCharsets.UTF_8);
+        this.testCaseOutput = testCaseOutput.getBytes();
     }
 
     public String getUsername() {
@@ -60,14 +57,6 @@ public class Submission {
 
     public void setProblemId(UUID problemId) {
         this.problemId = problemId;
-    }
-
-    public LocalDateTime getSubmissionDate() {
-        return submissionDate;
-    }
-
-    public void setSubmissionDate(LocalDateTime submissionDate) {
-        this.submissionDate = submissionDate;
     }
 
     public int getExecutionTime() {

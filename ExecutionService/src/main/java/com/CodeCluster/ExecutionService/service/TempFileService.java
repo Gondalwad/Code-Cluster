@@ -1,6 +1,8 @@
 package com.CodeCluster.ExecutionService.service;
 
 import com.CodeCluster.ExecutionService.model.ProblemsTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -9,6 +11,8 @@ import java.nio.file.*;
 
 @Service
 public class TempFileService {
+
+    private static final Logger log = LoggerFactory.getLogger(TempFileService.class);
 
     public File prepareTempFolder(String jobId, String code, ProblemsTable problem, String fileExtension) {
         Path directoryPath = Paths.get("temp", jobId);
@@ -35,24 +39,37 @@ public class TempFileService {
         return folder;
     }
 
-    /// deletes folder created with jobId
+    /// method to delete temp folder and files
     public void cleanupTempFolder(String jobId) {
-        Path directoryPath = Paths.get("temp", jobId);
-        try {
-            if (Files.exists(directoryPath)) {
-                Files.walk(directoryPath)
-                        .sorted((p1, p2) -> p2.compareTo(p1)) // children first, then parent
-                        .forEach(path -> {
-                            try {
-                                Files.deleteIfExists(path);
-                            } catch (IOException e) {
-                                throw new RuntimeException("Failed to delete: " + path, e);
-                            }
-                        });
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error cleaning up temp folder for job " + jobId, e);
+        String absolutePath = new File("temp", jobId).getAbsolutePath();
+        File directory = new File(absolutePath);
+
+        if (directory.exists() && directory.isDirectory()) {
+            deleteRecursively(directory);
+        } else {
+            log.error("Directory not found or is not a valid directory: {}", absolutePath);
         }
     }
 
+
+     /// private method to deletes the specified directory and its contents.
+    private void deleteRecursively(File dir) {
+        File[] files = dir.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    deleteRecursively(file);
+                } else {
+                    if (!file.delete()) {
+                        log.warn("Failed to delete file: {}", file.getAbsolutePath());
+                    }
+                }
+            }
+        }
+        /// warning if deletion failed
+        if (!dir.delete()) {
+            log.warn("Failed to delete directory: {}", dir.getAbsolutePath());
+        }
+    }
 }

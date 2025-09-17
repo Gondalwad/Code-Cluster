@@ -1,13 +1,12 @@
 package com.CodeCluster.SubmissionService.controller;
 
+import com.CodeCluster.SubmissionService.dto.ResultResponseDTO;
 import com.CodeCluster.SubmissionService.dto.SubmitRequestDTO;
 import com.CodeCluster.SubmissionService.dto.SubmitResponseDTO;
 import com.CodeCluster.SubmissionService.service.SolutionSubmissionService;
+import com.CodeCluster.SubmissionService.service.ResultService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,9 +15,10 @@ import java.util.UUID;
 public class SubmissionController {
 
     private final SolutionSubmissionService submissionService;
-
-    public SubmissionController(SolutionSubmissionService submissionService) {
+    private final ResultService resultService;
+    public SubmissionController(SolutionSubmissionService submissionService, ResultService resultService) {
         this.submissionService = submissionService;
+        this.resultService = resultService;
     }
 
     @PostMapping("/submit-solution")
@@ -26,9 +26,19 @@ public class SubmissionController {
         /// upload event to kafka for execution using submission service which return SubmitResponseDTO to
         /// send to respond user immediately
         SubmitResponseDTO submitResponse = submissionService.uploadEvent(UUID.randomUUID(), submitRequest);
-
-
         return ResponseEntity.status(201).body(submitResponse);
 
     }
+
+    @GetMapping("/result")
+    public ResponseEntity<ResultResponseDTO> getResult(@RequestParam(name = "jobId", required = true) String jobId){
+        Optional<ResultResponseDTO> resultResponseDTO = resultService.fetchResult(jobId);
+
+        /// response to user
+        return resultResponseDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+    }
+
+
+//    public ResponseEntity<TestCaseResultDTO> submit
 }

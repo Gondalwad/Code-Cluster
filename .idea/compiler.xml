@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SubmissionService" />
+        <module name="ProblemsService" />
         <module name="ExecutionService" />
         <module name="UserService" />
         <module name="ApiGateway" />
@@ -19,7 +19,7 @@
       <module name="ApiGateway" options="-parameters" />
       <module name="AuthService" options="-parameters" />
       <module name="ExecutionService" options="-parameters" />
-      <module name="SubmissionService" options="-parameters" />
+      <module name="ProblemsService" options="-parameters" />
       <module name="UserService" options="-parameters" />
     </option>
   </component>

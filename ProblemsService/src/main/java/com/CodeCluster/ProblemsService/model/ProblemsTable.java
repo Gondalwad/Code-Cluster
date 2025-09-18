@@ -1,6 +1,8 @@
-package com.CodeCluster.ExecutionService.model;
+package com.CodeCluster.ProblemsService.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 import java.util.UUID;
 
@@ -8,11 +10,12 @@ import java.util.UUID;
 public class ProblemsTable {
     @Id
     private UUID problemId;
-    @Column(unique = true)
     private String problemName;
     private String problemDescription;
     private String testCaseFileName;
     private String codeFileName;
+    private int problemNo;
+    private String difficultyLevel;
     @Lob
     private String javaTestCaseFile;
     @Lob
@@ -74,4 +77,12 @@ public class ProblemsTable {
     public void setCodeFileName(String codeFileName) {
         this.codeFileName = codeFileName;
     }
+
+    public int getProblemNo() {return problemNo;}
+
+    public void setProblemNo(int problemNo) { this.problemNo = problemNo;}
+
+    public String getDifficultyLevel() {return difficultyLevel;}
+
+    public void setDifficultyLevel(String difficultyLevel) {this.difficultyLevel = difficultyLevel;}
 }

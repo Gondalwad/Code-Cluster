@@ -19,7 +19,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-            return httpSecurity.authorizeHttpRequests(authorize-> authorize.anyRequest().permitAll())
+            return httpSecurity
+                    .cors(AbstractHttpConfigurer::disable)
+                    .authorizeHttpRequests(authorize-> authorize.anyRequest().permitAll())
                     .formLogin(AbstractHttpConfigurer::disable)
                     .csrf(AbstractHttpConfigurer::disable)
                     .httpBasic(AbstractHttpConfigurer::disable)

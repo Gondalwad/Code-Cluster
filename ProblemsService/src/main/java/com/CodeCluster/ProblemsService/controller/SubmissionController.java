@@ -5,7 +5,9 @@ import com.CodeCluster.ProblemsService.dto.SubmitRequestDTO;
 import com.CodeCluster.ProblemsService.dto.SubmitResponseDTO;
 import com.CodeCluster.ProblemsService.service.SolutionSubmissionService;
 import com.CodeCluster.ProblemsService.service.ResultService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -22,7 +24,7 @@ public class SubmissionController {
     }
 
     @PostMapping("/submit-solution")
-    public ResponseEntity<SubmitResponseDTO> submitSolution(@RequestBody SubmitRequestDTO submitRequest){
+    public ResponseEntity<SubmitResponseDTO> submitSolution(@Validated @RequestBody SubmitRequestDTO submitRequest){
         /// upload event to kafka for execution using submission service which return SubmitResponseDTO to
         /// send to respond user immediately
         SubmitResponseDTO submitResponse = submissionService.uploadEvent(UUID.randomUUID(), submitRequest);

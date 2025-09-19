@@ -24,8 +24,8 @@ public class SubmissionsService {
     public boolean saveResponse(String testCaseOutput, SubmitRequestDTO submitRequestDTO){
 
         Submission submission = new Submission();
-        submission.setJobId(UUID.fromString(submitRequestDTO.getJobId()));
-        submission.setProblemId(UUID.fromString(submitRequestDTO.getProblemId()));
+        submission.setJobId(UUID.fromString(submitRequestDTO.getJobId().trim()));
+        submission.setProblemId(UUID.fromString(submitRequestDTO.getProblemId().trim()));
         submission.setUsername(submitRequestDTO.getUsername());
         submission.setTestCaseOutput(testCaseOutput);
         submission.setSubmissionDate(LocalDateTime.now());
@@ -34,7 +34,7 @@ public class SubmissionsService {
         try{
             /// sets status as error if testCaseOutput doesn't start with literal "Input"
             /// or if contains literal "failed" or if contains literal "Exception"
-            if(testCaseOutput.contains("Exception")){
+            if(testCaseOutput.contains("Exception") || testCaseOutput.startsWith("Execution failed with")){
                 submission.setStatus("Error");
                 submissionsRepository.save(submission);
                 return true;

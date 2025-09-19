@@ -4,6 +4,7 @@ import com.CodeCluster.UserService.dto.UserRequestDTO;
 import com.CodeCluster.UserService.dto.UserResponseDTO;
 import com.CodeCluster.UserService.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class UserController {
             return ResponseEntity.internalServerError().build();
         }
 
-        return ResponseEntity.ok(createdUser.get());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser.get());
 
 
     }

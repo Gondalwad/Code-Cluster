@@ -33,7 +33,7 @@ public class SolutionSubmissionService {
             // sets jobId
             submitRequest.setJobId(jobId);
 
-
+            /// gets id from name of program //
             submitRequest.setProblemId(
                     problemsTableService
                             .getProblemByName(

@@ -12,15 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-
 @Service
 public class UserService {
 
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserRepo userRepo;
-
-    public UserService(UserRepo userRepo){
+    private final PasswordEncoderService passwordEncoderService;
+    public UserService(UserRepo userRepo, PasswordEncoderService passwordEncoderService){
         this.userRepo = userRepo;
+        this.passwordEncoderService = passwordEncoderService;
     }
 
     // create user
@@ -34,6 +34,9 @@ public class UserService {
         if(userRepo.existsByEmail(user.getEmail())){
             throw new EmailExistsException("User already Exists By Email : " + user.getEmail());
         }
+
+        /// sets encoded password
+        user.setPassword(passwordEncoderService.passwordEncoder(userRequestDTO.getPassword()));
 
         try{
              User createdUser = userRepo.save(user);
